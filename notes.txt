@@ -1,0 +1,4 @@
+Build a Cucumber BDD framework:
+1. Add dependencies (selenium, webdrivermanager, cucumber-java, cucumber-junit, cucumber-core)
+2. Add .gitignore
+3. Create packages, add utilities, properties file
