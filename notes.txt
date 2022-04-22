@@ -2,3 +2,32 @@ Build a Cucumber BDD framework:
 1. Add dependencies (selenium, webdrivermanager, cucumber-java, cucumber-junit, cucumber-core)
 2. Add .gitignore
 3. Create packages, add utilities, properties file
+4.
+
+
+     Cucumber framework components
+     - feature files
+     - Step Definition classes
+     - Runner class
+     - the scenario steps in feature files are connected to the corresponding
+       step definition methods in step def classes thru Runner class's @CucumberOptions options:
+          features = "src/test/resources",
+          glue = "stepDefinitions"
+     - the scenario step is matched to the corresponding step definition method through the text of the scenario step and step definition
+           For example:
+               step -> Given I am on the homepage
+               step def method annotation -> @Given("I am on the homepage")
+
+
+
+    Basic workflow of a Cucumber framework
+
+     - create a feature file
+     - add scenario/s to a feature file
+     - generate snippet/s for unimplemented steps
+     - implement the each step def method logic
+
+
+    Cucumber Hooks:
+    - methods with @Before and @After annotations that are added under step defs folder
+    - used to setup  and teardown
