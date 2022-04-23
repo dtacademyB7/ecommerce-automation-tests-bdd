@@ -20,7 +20,15 @@ import org.junit.runner.RunWith;
         glue = "stepDefinitions",        // path to the folder where step definition classes are located
                                      //Cucumber will use the package of the runner class if this option is not provided
 
-        stepNotifications = true     //shows each step of the scenario in the report
+        stepNotifications = true,     //shows each step of the scenario in the report
+
+//        snippets = CucumberOptions.SnippetType.CAMELCASE,
+
+        plugin = {"pretty",
+                  "html:target/built-in-report/built-in-report.html",
+                  "json:target/cucumber.json"
+                }
+
 
 //        ,dryRun = true             // step definition execution is skipped, used for generating snippets without running the code
 )

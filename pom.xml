@@ -67,6 +67,64 @@
     </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+
+                    <includes>
+<!--                        <!– name of your Runner class-->
+                        <!--suppress UnresolvedMavenProperty -->
+                        <include>**/*CucumberRunner.java</include>
+                    </includes>
+
+
+
+                </configuration>
+            </plugin>
+
+
+        <plugin>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.7.0</version>
+            <executions>
+                <execution>
+                    <id>execution</id>
+<!--                    the report generation requires that you run the tests thru cmd with mvn verify-->
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+<!--                        Add your project name here-->
+                        <projectName>E-commerce Project</projectName>
+
+                        <!-- folder where the report file will be generated -->
+                        <outputDirectory>${project.build.directory}/pretty-report</outputDirectory>
+                        <!-- folder where it looks for json file to use -->
+                        <inputDirectory>${project.build.directory}</inputDirectory>
+                        <jsonFiles>
+                            <!-- name of the json file you want to use to generate the report -->
+                            <param>**/*cucumber.json</param>
+                        </jsonFiles>
+
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+
+
+
+        </plugins>
+    </build>
+
+
 
 
 </project>

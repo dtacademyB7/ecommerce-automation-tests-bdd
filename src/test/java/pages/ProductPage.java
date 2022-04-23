@@ -13,7 +13,20 @@ public class ProductPage {
     @FindBy(id = "our_price_display")
     public WebElement productPrice;
 
+    @FindBy(id = "quantity_wanted")
+    public WebElement quantity;
 
+
+    @FindBy(xpath = "//i[@class='icon-plus']")
+    public WebElement plusButton;
+
+
+    public void clickOnPlusButton(int times){
+
+        for (int i = 0; i < times; i++) {
+            plusButton.click();
+        }
+    }
 
 
     public ProductPage(){

@@ -32,6 +32,28 @@ public class ProductDetailsStepDefs {
         Assert.assertEquals(price, Double.valueOf(productPage.productPrice.getText().replace("$", "")));
     }
 
+    @Then("The default quantity should be {int}")
+    public void the_default_quantity_should_be(Integer defQuantity) {
+
+        ProductPage productPage = new ProductPage();
+        Assert.assertEquals(defQuantity, Integer.valueOf(productPage.quantity.getAttribute("value")));
+    }
+    Integer sharedTimes;
+    @When("I click on a plus button {int} times")
+    public void i_click_on_a_plus_button_times(Integer times) {
+        sharedTimes = times;
+        ProductPage productPage = new ProductPage();
+        productPage.clickOnPlusButton(times);
+
+    }
+    @Then("The quantity should be correct")
+    public void the_quantity_should_be() {
+        Integer actualQuantity = Integer.valueOf(new ProductPage().quantity.getAttribute("value"));
+        Integer expectedQuantity = sharedTimes + 1;
+
+        Assert.assertEquals(expectedQuantity, actualQuantity);
+    }
+
 
 
 

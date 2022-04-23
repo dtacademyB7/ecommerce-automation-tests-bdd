@@ -24,7 +24,7 @@ Feature: Product details
     Then The title of the product should be "Blouse"
     Then The price of the product should be 27.00
 
-  @temp
+
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Faded Short Sleeve T-shirts"
@@ -32,13 +32,29 @@ Feature: Product details
     Then The title of the product should be "Faded Short Sleeve T-shirts"
     Then The price of the product should be 16.51
 
-@temp
+
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Printed Summer Dress"
     And I land on a product details page with title containing "Printed Summer Dress"
     Then The title of the product should be "Printed Summer Dress"
     Then The price of the product should be 28.98
+
+
+
+  Scenario: Verify product default quantity
+    Given I am on the homepage
+    When I click on a product "Printed Chiffon Dress"
+    Then The default quantity should be 1
+
+
+  Scenario: Verify quantity increase with plus button
+    Given I am on the homepage
+    When I click on a product "Printed Chiffon Dress"
+    And I click on a plus button 20 times
+    Then The quantity should be correct
+
+
 
 
 #     demo of the diff types of parameters
