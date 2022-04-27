@@ -1,7 +1,7 @@
 Feature: Product details
 
 
-  @productDetails @module2
+
 #  Scenario: Verify product title
 #    Given I am on the homepage
 #    When I click on a product Faded Short Sleeve T-shirts
@@ -25,6 +25,7 @@ Feature: Product details
     Then The price of the product should be 27.00
 
 
+    @product @param
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Faded Short Sleeve T-shirts"
@@ -32,7 +33,7 @@ Feature: Product details
     Then The title of the product should be "Faded Short Sleeve T-shirts"
     Then The price of the product should be 16.51
 
-
+  @product @param
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Printed Summer Dress"
@@ -41,13 +42,13 @@ Feature: Product details
     Then The price of the product should be 28.98
 
 
-
+  @product @quantity
   Scenario: Verify product default quantity
     Given I am on the homepage
     When I click on a product "Printed Chiffon Dress"
     Then The default quantity should be 1
 
-
+  @product @plus
   Scenario: Verify quantity increase with plus button
     Given I am on the homepage
     When I click on a product "Printed Chiffon Dress"
@@ -55,7 +56,53 @@ Feature: Product details
     Then The quantity should be correct
 
 
+     @docstring
+    Scenario: Demo of passing multiline text (docstring) into a step
+      Given I am connected to database
+      When I send the following query
+          """
 
+           SELECT '%c%' as Chapter,
+            SUM(CASE WHEN ticket.status IN ('new','assigned') THEN 1 ELSE 0 END) as `New`,
+            ...
+            SUM(CASE WHEN ticket.status='closed' THEN 1 ELSE 0 END) as 'Closed',
+            count(id) AS Total,
+            ticket.id AS _id
+            FROM engine.ticket
+            INNER JOIN engine.ticket_custom
+            ON ticket.id = ticket_custom.ticket
+            WHERE ticket_custom.name='chapter'
+            AND ticket_custom.value LIKE '%c%'
+            AND type='New material'
+            AND milestone='1.1.12'
+            AND component NOT LIKE 'internal_engine'
+            GROUP BY ticket.id;
+        """
+      Then the result should be correct
+
+
+
+
+
+
+
+#  Scenario vs Scenario Outline
+#
+
+
+  Scenario Outline: Verify quantity increase with plus button with different values
+    Given I am on the homepage
+    When I click on a product "<product>"
+    And I click on a plus button <amount> times
+    Then The quantity should be correct
+
+    Examples:
+      | amount | product                     |
+      | 1      | Printed Dress               |
+      | 20     | Printed Summer Dress        |
+      | 50     | Printed Chiffon Dress       |
+      | 100    | Blouse                      |
+      | 500    | Faded Short Sleeve T-shirts |
 
 #     demo of the diff types of parameters
 #    @temp

@@ -33,3 +33,30 @@ Build a Cucumber BDD framework:
     - used to setup  and teardown
 
 
+   How to run scenarios with specific tags through CMD?
+
+    mvn verify -Dcucumber.filter.tags="@product"
+    mvn verify -Dcucumber.filter.tags="@product and not @quantity"
+    mvn verify -Dcucumber.filter.tags="@product or not @quantity"
+
+    The cmd tags will override the tags in Runner class.
+
+
+    Cucumber DataTable workflow:
+    - add a DataTable to a Scenario Step
+    - generate a snippet and change the DataTable parameter to one of the following for automatic conversion:
+      List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or Map<K, List<V>>
+
+
+     Cucumber Scenario Outline:  native cucumber mechanism to implement Data-Driven Testing
+       Difference between Examples Table and DataTable:
+        -Examples table applies to the entire scenario outline, meaning for each row of the table, the entire scenario
+        is going to run once
+        - DataTable belongs to only a single scenario step and it is a convenient way to pass complex table style data
+        into a single step.
+
+
+
+
+
+

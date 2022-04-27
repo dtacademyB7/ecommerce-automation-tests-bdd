@@ -8,13 +8,13 @@ Feature:Search Bar feature
     Given I am on the homepage
 
 
-   @search @product @blouse @temp
+   @search  @blouse @temp
   Scenario: Product search
     When I search for a Blouse
     Then I should see the Blouse in the search results
 
 
-  @search @product @temp
+  @search @temp
   Scenario: Product search 2
     When I search for a Printed Dress
     Then I should see the Printed Dress in the search results

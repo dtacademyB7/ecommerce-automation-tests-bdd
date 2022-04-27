@@ -20,6 +20,16 @@ public class ProductPage {
     @FindBy(xpath = "//i[@class='icon-plus']")
     public WebElement plusButton;
 
+    @FindBy(xpath = "//span[@itemprop='sku']")
+    public WebElement productModel;
+
+    @FindBy(xpath = "//table[@class='table-data-sheet']//tr[1]//td[2]")
+    public WebElement productComposition;
+    @FindBy(xpath = "//table[@class='table-data-sheet']//tr[2]//td[2]")
+    public WebElement productStyle;
+    @FindBy(xpath = "//table[@class='table-data-sheet']//tr[3]//td[2]")
+    public WebElement productProperty;
+
 
     public void clickOnPlusButton(int times){
 
