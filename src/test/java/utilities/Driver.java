@@ -16,52 +16,58 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class Driver {
 
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>(); // supports thread safe Webdrivers
 
     private Driver(){} // to prevent creating objects
 
 
-    public static WebDriver getDriver(){
+    public static synchronized WebDriver getDriver(){
 
-        if(driver == null) { // check if the WebDriver is not initialized
+        if(drivers.get() == null) { // check if the WebDriver is not initialized
 
-            String browser = PropertyReader.getProperty("browser").toLowerCase();
-            switch (browser) {
+            String browser = System.getProperty("browser");
+
+            if(browser == null) { // if the browser was not passed through command line
+                browser = PropertyReader.getProperty("browser");
+            }
+
+
+            switch (browser.toLowerCase()) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    drivers.set(new ChromeDriver());
                     break;
                 case "chromeheadless":
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--headless");
                     options.addArguments("start-maximized");
-                    driver = new ChromeDriver(options);
+                    drivers.set(new ChromeDriver(options));
                     break;
 
                 case "edge":
                     WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    drivers.set(new EdgeDriver());
                     break;
                 case "edgeheadless":
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions edgeOptions = new EdgeOptions();
                     edgeOptions.addArguments("--headless");
-                    driver = new EdgeDriver(edgeOptions);
+                    drivers.set(new EdgeDriver(edgeOptions));
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    drivers.set(new FirefoxDriver());
                     break;
                 case "firefoxheadless":
                     WebDriverManager.firefoxdriver().setup();
                     FirefoxOptions foptions = new FirefoxOptions();
                     foptions.addArguments("--headless");
-                    driver = new FirefoxDriver(foptions);
+                    drivers.set(new FirefoxDriver(foptions));
                     break;
                 case "safari":
                     WebDriverManager.safaridriver().setup();
-                    driver = new SafariDriver();
+                    drivers.set(new SafariDriver());
                     break;
                 default:
                     throw new RuntimeException("Invalid browser");
@@ -69,14 +75,14 @@ public class Driver {
             }
         }
 
-        return driver;
+        return drivers.get();
     }
 
 
-    public static  void quitDriver(){
-        if(driver != null){
-            driver.quit();
-            driver = null;
+    public static synchronized void quitDriver(){
+        if(drivers.get() != null){
+            drivers.get().quit();
+            drivers.remove();
         }
 
     }

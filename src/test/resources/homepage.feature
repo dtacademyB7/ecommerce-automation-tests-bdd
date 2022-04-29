@@ -14,10 +14,10 @@ Feature: Homepage related functionalities
       | Printed Chiffon Dress       |
 #    Cucumber DataTable is a convenient way to pass a set of data into a SINGLE step
 
-
+  @fail
   Scenario: Verify homepage product details
     Given I am on the homepage
-    When  I click on a product "Blouse"
+    When  I click on a product "Blouze"
     Then The product details should be the following as list of lists
       | Name   | Price | Model  | Composition | Style  | Properties   |
       | Blouse | 27.00 | demo_2 |  Cotton     | Casual | Short Sleeve |
@@ -32,7 +32,7 @@ Feature: Homepage related functionalities
       | Blouse | 27.00 | demo_2 |  Cotton     | Casual | Short Sleeve |
 #      | Example| 34.00 | dascsa |  Chiffon    | vds    | dscsd        |
 
-   @test
+
   Scenario Outline: Verify homepage product details with multiple products
     Given I am on the homepage
     When  I click on a product "<product>"

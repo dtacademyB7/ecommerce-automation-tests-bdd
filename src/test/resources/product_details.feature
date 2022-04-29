@@ -25,30 +25,30 @@ Feature: Product details
     Then The price of the product should be 27.00
 
 
-    @product @param
+    @product @param @fail
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Faded Short Sleeve T-shirts"
     And I land on a product details page with title containing "Faded Short Sleeve T-shirts"
     Then The title of the product should be "Faded Short Sleeve T-shirts"
-    Then The price of the product should be 16.51
+    Then The price of the product should be 16.52
 
-  @product @param
+  @product @param  @fail
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Printed Summer Dress"
     And I land on a product details page with title containing "Printed Summer Dress"
     Then The title of the product should be "Printed Summer Dress"
-    Then The price of the product should be 28.98
+    Then The price of the product should be 28.99
 
 
-  @product @quantity
+  @product @quantity  @fail
   Scenario: Verify product default quantity
     Given I am on the homepage
     When I click on a product "Printed Chiffon Dress"
     Then The default quantity should be 1
 
-  @product @plus
+  @product @plus  @fail
   Scenario: Verify quantity increase with plus button
     Given I am on the homepage
     When I click on a product "Printed Chiffon Dress"

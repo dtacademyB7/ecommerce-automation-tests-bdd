@@ -8,14 +8,14 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        tags = "@fail",    // will run all scenarios with the given tag
+//        tags = "@search",    // will run all scenarios with the given tag
 //        @search or @productDetails -> all scenarios tagged with either @search or @productDetails
 
         //@search and @product -> all scenarios tagged with both @search and @product
 
        // "not @product" -> all scenarios that are NOT tagged with @product
 
-        features = "src/test/resources", // path to a folder where feature files are located
+        features = "src/test/resources/parallel", // path to a folder where feature files are located
                                         // //Cucumber will use the package of the runner class if this option is not provided
         glue = "stepDefinitions",        // path to the folder where step definition classes are located
                                      //Cucumber will use the package of the runner class if this option is not provided
@@ -35,5 +35,5 @@ import org.junit.runner.RunWith;
 )
 
 
-public class CucumberRunner {
+public class ParallelRunner {
 }

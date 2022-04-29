@@ -76,10 +76,21 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
 
+<!--                    the following 2 lines are for running feature files in parallel -->
+                    <parallel>methods</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+
                     <includes>
 <!--                        <!– name of your Runner class-->
                         <!--suppress UnresolvedMavenProperty -->
                         <include>**/*CucumberRunner.java</include>
+
+
+<!--                           runner class to run feature in parallel   -->
+<!--                        <include>**/*ParallelRunner.java</include>-->
+
+<!--                         to pass the name of the runner class thru cmd -->
+<!--                        <include>${runnerClass}</include>-->
                     </includes>
 
 
