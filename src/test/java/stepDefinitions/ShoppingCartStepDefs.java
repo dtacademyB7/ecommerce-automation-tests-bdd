@@ -1,10 +1,13 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.ProductPage;
 import pages.ShoppingCartPage;
+import utilities.Driver;
+import utilities.PropertyReader;
 import utilities.SeleniumUtils;
 
 import java.util.List;
@@ -60,5 +63,27 @@ public class ShoppingCartStepDefs {
     }
 
 
+//    @Given("I am on the homepage")
+//    public void i_am_on_the_homepage() {
+//        Driver.getDriver().get(PropertyReader.getProperty("url"));
+//    }
+
+
+
+    @When("do something on the page")
+    public void do_something_on_the_page() {
+
+    }
+    @Then("I should see the value {word}")
+    public void i_should_see_the_value_blouse() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("I should see the value Blouse")
+    public void i_should_see_the_value_blousesad() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
 }

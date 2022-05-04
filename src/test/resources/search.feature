@@ -8,6 +8,7 @@ Feature:Search Bar feature
     Given I am on the homepage
 
 
+
    @search  @blouse @temp
   Scenario: Product search
     When I search for a Blouse
@@ -23,3 +24,8 @@ Feature:Search Bar feature
   Scenario: Product search 3
     When I search for a Printed Summer Dress
     Then I should see the Printed Summer Dress in the search results
+
+  @error
+  Scenario: Product search
+    When do something on the page
+    Then I should see the value "Blouse"
