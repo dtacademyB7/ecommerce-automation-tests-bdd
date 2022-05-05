@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.DBUtility;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
@@ -27,6 +28,14 @@ public class Hooks {
 
     }
 
+    @Before ("@db")
+    public void setupDB(){
+
+        DBUtility.createConnection();
+
+    }
+
+
 //    @Before ("@module2")   // the before logic that runs before all scenarios tagged with @module2
 //    public void setup2(){
 //
@@ -37,6 +46,11 @@ public class Hooks {
 //
 //
 //    }
+
+    @After ("@db")
+    public void tearDownDb(){
+        DBUtility.close();
+    }
 
     @After
     public void tearDown(Scenario scenario){
