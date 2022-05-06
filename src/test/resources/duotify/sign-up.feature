@@ -41,7 +41,7 @@ Feature: Sign up features
       | mhandsheart3 | Melvyn     | Handsheart | mhandsheart3@addtoany.com | fojYTrEIMLrx      |
 
 
-  @db
+
   Scenario: Verify user sign up flow from DB to UI
 
     Given I create a new user in the Database with the following details
