@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
+import pages.duotifyPages.HomePageDuo;
 import pages.duotifyPages.SignUpPage;
 import utilities.DBUtility;
 import utilities.Driver;
@@ -114,4 +115,62 @@ public class SignUpStepDefs {
         DBUtility.updateQuery(updateQuery); // clean the database by removing the user we just created from the ui
 
     }
+
+    String expectedUSername;
+    String expectedpass;
+    String expectedfirst;
+    String expectedlast;
+    String expectedemail;
+    @Given("I create a new user in the Database with the following details")
+    public void i_create_a_new_user_in_the_database_with_the_following_details(List<Map<String, String>> dataTable) throws SQLException {
+
+        Map<String, String> map = dataTable.get(0);
+       expectedUSername =  map.get("username");
+
+        expectedfirst =  map.get("first");
+        expectedlast =  map.get("last");
+
+        expectedemail =  map.get("email");
+
+        expectedpass =  map.get("password");
+
+        String query = "insert into users (username, firstName, lastName, email, password) \n" +
+                "values ('"+expectedUSername+"', '"+expectedfirst+"', '"+expectedlast+"', '"+expectedemail+"', '"+DigestUtils.md5Hex(expectedpass)+"')";
+        DBUtility.updateQuery(query);
+    }
+    @When("I login with the same credentials on the UI")
+    public void i_login_with_the_same_credentials_on_the_ui() throws InterruptedException {
+
+        Driver.getDriver().get("http://qa-duotify.us-east-2.elasticbeanstalk.com/register.php");
+        SignUpPage signUpPage = new SignUpPage();
+
+        signUpPage.loginUsername.sendKeys(expectedUSername);
+        System.out.println(expectedpass);
+        signUpPage.loginPassword.sendKeys(expectedpass);
+        Thread.sleep(2000);
+        signUpPage.loginButton.click();
+
+    }
+
+    @Then("firstname, lastname and email should be correct")
+    public void firstname_lastname_and_email_should_be_correct() throws SQLException {
+
+        HomePageDuo homePageDuo = new HomePageDuo();
+
+        String[] arr = homePageDuo.nameFirstAndLast.getText().split(" ");
+
+
+        homePageDuo.nameFirstAndLast.click();
+        homePageDuo.userDetails.click();
+
+        String actualEmail = homePageDuo.emailInput.getAttribute("value");
+
+        Assert.assertEquals(expectedfirst, arr[0]);
+        Assert.assertEquals(expectedlast, arr[1]);
+        Assert.assertEquals(expectedemail, actualEmail);
+
+        String updateQuery = "delete from users where username='"+expectedUSername+"'";
+        DBUtility.updateQuery(updateQuery); // clean the database by removing the user we just created from the ui
+    }
+
 }

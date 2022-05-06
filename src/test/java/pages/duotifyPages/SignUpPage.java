@@ -42,5 +42,15 @@ public class SignUpPage {
     @FindBy(name = "registerButton")
     public WebElement registerButton;
 
+    @FindBy(id = "loginUsername")
+    public WebElement loginUsername;
+
+    @FindBy(id = "loginPassword")
+    public WebElement loginPassword;
+
+    @FindBy(name = "loginButton")
+    public WebElement loginButton;
+
+
 
 }
