@@ -7,15 +7,14 @@ import org.junit.Test;
 import java.util.Random;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
-public class RestAssuredDemo {
+public class VideoGameDbAPITests {
 
 
-//    static{
-//        baseURI = "http://localhost:8080/app";
-//    }
+    static{
+        baseURI = "http://localhost:8080/app";
+    }
 
 
 
@@ -35,7 +34,7 @@ public class RestAssuredDemo {
 
           // Set the BASE URI
           //RestAssured.baseURI = "http://localhost:8080/app";
-          baseURI = "http://localhost:8080/app";
+
 
 
           // given - request specifications are added here
@@ -72,30 +71,7 @@ public class RestAssuredDemo {
       }
 
 
-    @Test
-    public void testRestAssuredComplexResponse(){
 
-          baseURI = "https://maps.googleapis.com/maps/api";
-
-
-          given().
-                  pathParam("type", "json").
-                  queryParam("input", "Duotech Academy").
-                  queryParam("inputtype", "textquery").
-                  queryParam("key", "AIzaSyDdNmHK2RgQVbpksSzAFI6A2byAcdm_5l8").
-                  queryParam("fields", "formatted_address,name,rating,opening_hours,geometry,photo").
-
-          when().log().all().
-                  get("place/findplacefromtext/{type}").
-          then(). log().all().
-                  statusCode(200).
-                  body("candidates[0].formatted_address", equalTo("2735 Hartland Rd Suite 302, Falls Church, VA 22043, United States")).
-                  body("candidates[0].geometry.location.lat", equalTo(38.878937F)).
-                  body("candidates[0].rating", equalTo(5)).
-                  body("candidates[0].photos[0].html_attributions[0]", equalTo("<a href=\"https://maps.google.com/maps/contrib/106148087424852379805\">A Google User</a>"));
-//
-//            candidates[0].formatted_address  -> Groovy Gpath syntax
-    }
 
 
 
@@ -103,7 +79,7 @@ public class RestAssuredDemo {
     public void testPOST(){
 
           int id =  100 + new Random().nextInt(1000);
-        baseURI = "http://localhost:8080/app";
+
 
         given().
                 header("Accept", "application/json").
@@ -126,5 +102,36 @@ public class RestAssuredDemo {
 
 
     }
+
+
+    @Test
+    public void testPUT(){
+
+
+        given().
+                header("Accept", "application/json"). // I can accept/understand only json
+                header("Content-Type", "application/json").
+                body("{\n" +
+                        "    \"id\": 2,\n" +
+                        "    \"name\": \"Need For Speed 3\",\n" +
+                        "    \"releaseDate\": \"2010-03-10\",\n" +
+                        "    \"reviewScore\": 99,\n" +
+                        "    \"category\": \"Driving\",\n" +
+                        "    \"rating\": \"Universal\"\n" +
+                        "}").
+                pathParam("videoGameId", "2").
+        when().log().all().
+                    put("/videogames/{videoGameId}").
+        then().log().all().
+
+                    statusCode(is(200)).
+                    body("id", equalTo(2)).
+                    header("Content-Type", "application/json");
+
+
+
+    }
+
+
 
 }
