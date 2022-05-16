@@ -1,12 +1,10 @@
 package apiTests;
 
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.mapper.ObjectMapperType;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
@@ -160,6 +158,42 @@ public class SerializationDeserialization {
 
         System.out.println(responseAsVideoGameObj.getName());
 
+
+    }
+
+    @Test
+    public void deserializeUsingList(){
+
+
+//        baseURI = "http://localhost:8080/app";
+//        List list =  given().
+//                header("Accept", "application/json").
+//                when().log().all().
+//
+//        get("/videogames").
+//                then().log().all().
+//                assertThat().
+//                statusCode(equalTo(200)).extract().as(List.class);  // Raw list type
+//
+//
+//          Map<String, Object> game = (Map<String, Object>) list.get(0);
+//
+//          System.out.println(game.get("id"));
+
+        baseURI = "http://localhost:8080/app";
+        given().
+                header("Accept", "application/json").
+                when().log().all().
+
+                get("/videogames").
+                then().log().all().
+                assertThat().
+                statusCode(equalTo(200)).extract().as( new TypeRef<List<Map<String,Object>>>(){} );
+
+
+//        Map<String, Object> game = (Map<String, Object>) list.get(0);
+//
+//        System.out.println(game.get("id"));
 
     }
 

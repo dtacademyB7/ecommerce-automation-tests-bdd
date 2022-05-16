@@ -11,6 +11,8 @@ public class SignUpPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+
+
     @FindBy(id = "hideLogin")
     public WebElement signUpLink;
 

@@ -73,7 +73,7 @@ public class BusinessRuleStepDefs {
 
             if(list2.get(i).equals(list2.get(i+1))){
 
-                System.out.println(list2.get(i) + " " + list2.get(i+1));
+//                System.out.println(list2.get(i) + " " + list2.get(i+1));
                 hasNoDuplicate = false;
                break;
             }
