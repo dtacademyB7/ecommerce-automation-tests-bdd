@@ -2,6 +2,8 @@ package apiTests;
 
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.mapper.ObjectMapperType;
+import io.restassured.path.json.JsonPath;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
@@ -102,7 +104,7 @@ public class SerializationDeserialization {
                 "FPS",
                 "PG13");
 
-        Map map = given().
+        Map<String, Object> map = given().
                 header("Accept", "application/json"). // I can accept/understand only json
                         header("Content-Type", "application/json").
                 body(videoGame).
@@ -113,7 +115,9 @@ public class SerializationDeserialization {
 
                 statusCode(is(200)).
 
-                header("Content-Type", "application/json").extract().as(Map.class);
+//                header("Content-Type", "application/json").extract().as(Map.class);  // raw type
+        header("Content-Type", "application/json").extract().as(new TypeRef<Map<String, Object>>() {
+                });
 
 
         System.out.println(map);
@@ -181,19 +185,50 @@ public class SerializationDeserialization {
 //          System.out.println(game.get("id"));
 
         baseURI = "http://localhost:8080/app";
-        given().
+        List<VideoGame> list = given().
                 header("Accept", "application/json").
                 when().log().all().
 
                 get("/videogames").
                 then().log().all().
                 assertThat().
-                statusCode(equalTo(200)).extract().as( new TypeRef<List<Map<String,Object>>>(){} );
+//                statusCode(equalTo(200)).extract().as(new TypeRef<List<Map<String, Object>>>() {});  // extracting the response as a specific type of List
+        statusCode(equalTo(200)).extract().as(new TypeRef<List<VideoGame>>() {});
 
 
 //        Map<String, Object> game = (Map<String, Object>) list.get(0);
 //
 //        System.out.println(game.get("id"));
+
+
+        for (VideoGame videoGame : list) {
+            Assert.assertNotNull(videoGame.getId());
+        }
+
+    }
+
+
+    @Test
+    public void jsonPAthExample(){
+
+        baseURI = "http://localhost:8080/app";
+        JsonPath jsonPath = given().
+                header("Accept", "application/json").
+                when().log().all().
+
+                get("/videogames").
+                then().log().all().
+                assertThat().
+                body("$.size()", equalTo(10)).
+//
+//            $ represents the root array object when the response is an array
+                statusCode(equalTo(200)).extract().jsonPath();
+
+        System.out.println(jsonPath.getList("$"));
+//        Object o = jsonPath.get(".id");
+
+//        System.out.println(o);
+
 
     }
 
