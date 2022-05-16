@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        tags = "@jenkins",    // will run all scenarios with the given tag
+        tags = "@signup",    // will run all scenarios with the given tag
 //        @search or @productDetails -> all scenarios tagged with either @search or @productDetails
 
         //@search and @product -> all scenarios tagged with both @search and @product

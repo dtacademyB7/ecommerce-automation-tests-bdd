@@ -1,7 +1,7 @@
 Feature: Sign up features
 
 
-
+  @signup
   Scenario: Verify user sign up
 
     Given I am on the duotify homepage
@@ -10,7 +10,7 @@ Feature: Sign up features
     And I should be able to verify the user details in the database
 
 
-
+  @signup
   Scenario: Verify user sign up using DataTable
 
     Given I am on the duotify homepage
