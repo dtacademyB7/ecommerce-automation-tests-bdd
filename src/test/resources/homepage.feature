@@ -1,7 +1,7 @@
 Feature: Homepage related functionalities
 
 
-
+  @jenkins
   Scenario: Verify homepage product names
     Given I am on the homepage
     Then The promoted products should be the following
@@ -23,7 +23,7 @@ Feature: Homepage related functionalities
       | Blouse | 27.00 | demo_2 |  Cotton     | Casual | Short Sleeve |
 
 
-
+  @jenkins
   Scenario: Verify homepage product details using list of maps
     Given I am on the homepage
     When  I click on a product "Blouse"
