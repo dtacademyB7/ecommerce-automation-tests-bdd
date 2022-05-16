@@ -95,8 +95,8 @@
                     <testFailureIgnore>true</testFailureIgnore>
 
 <!--                    the following 2 lines are for running feature files in parallel -->
-                    <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
+<!--                    <parallel>methods</parallel>-->
+<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
 
                     <includes>
 <!--                        <!– name of your Runner class-->
