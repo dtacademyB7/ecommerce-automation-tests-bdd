@@ -1,7 +1,9 @@
+
+
 Feature: Homepage related functionalities
 
 
-  @jenkins
+  @jenkins @smoke
   Scenario: Verify homepage product names
     Given I am on the homepage
     Then The promoted products should be the following
@@ -14,7 +16,7 @@ Feature: Homepage related functionalities
       | Printed Chiffon Dress       |
 #    Cucumber DataTable is a convenient way to pass a set of data into a SINGLE step
 
-  @fail
+  @fail @smoke
   Scenario: Verify homepage product details
     Given I am on the homepage
     When  I click on a product "Blouze"
@@ -23,7 +25,7 @@ Feature: Homepage related functionalities
       | Blouse | 27.00 | demo_2 |  Cotton     | Casual | Short Sleeve |
 
 
-  @jenkins
+  @jenkins @smoke
   Scenario: Verify homepage product details using list of maps
     Given I am on the homepage
     When  I click on a product "Blouse"

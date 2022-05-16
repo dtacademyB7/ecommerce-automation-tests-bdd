@@ -1,3 +1,5 @@
+
+@regression
 Feature: Product details
 
 
@@ -16,7 +18,7 @@ Feature: Product details
 #    And I land on a product details page with title containing Blouse
 #    Then The title of the product should be Blouse
 
-  @temp
+  @temp @smoke
   Scenario: Verify product title 3 using parametrization
     Given I am on the homepage
     When I click on a product "Blouse"
