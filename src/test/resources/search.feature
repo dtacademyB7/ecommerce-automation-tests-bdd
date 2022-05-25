@@ -9,7 +9,7 @@ Feature:Search Bar feature
 
 
 
-   @search  @blouse @temp
+   @search  @blouse @temp @trigger
   Scenario: Product search
     When I search for a Blouse
     Then I should see the Blouse in the search results
