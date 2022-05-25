@@ -20,7 +20,7 @@ public class Authentication {
         baseURI = "https://maps.googleapis.com/maps/api";
     }
 
-
+    // base URI can be set in a static block for the entire class
 
     @Test
     public void testAPIKEy() {
